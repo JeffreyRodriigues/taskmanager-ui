@@ -1,0 +1,12 @@
+li {
+  margin-bottom: 10px;
+}
+
+input[type="text"] {
+  margin-right: 5px;
+  padding: 3px 6px;
+}
+
+button {
+  margin-left: 5px;
+}

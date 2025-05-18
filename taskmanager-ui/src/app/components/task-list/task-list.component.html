@@ -1,0 +1,33 @@
+<h2>Gerenciador de Tarefas</h2>
+
+<!-- Formulário para adicionar nova tarefa -->
+<form (ngSubmit)="addTask()">
+  <input [(ngModel)]="newTask.title" name="title" placeholder="Título" required />
+  <input [(ngModel)]="newTask.description" name="description" placeholder="Descrição" />
+  <button type="submit">Adicionar</button>
+</form>
+
+<!-- Lista de tarefas com edição inline -->
+<ul>
+  <li *ngFor="let task of tasks">
+    <div *ngIf="editTaskId !== task.id; else editMode">
+      <input
+        type="checkbox"
+        [(ngModel)]="task.completed"
+        (change)="toggleComplete(task)"
+      />
+      <span [style.text-decoration]="task.completed ? 'line-through' : 'none'">
+        {{ task.title }} - {{ task.description }}
+      </span>
+      <button (click)="editTask(task)">Editar</button>
+      <button (click)="deleteTask(task.id)">Excluir</button>
+    </div>
+
+    <ng-template #editMode>
+      <input [(ngModel)]="task.title" name="editTitle-{{task.id}}" />
+      <input [(ngModel)]="task.description" name="editDesc-{{task.id}}" />
+      <button (click)="saveEdit(task)">Salvar</button>
+      <button (click)="cancelEdit()">Cancelar</button>
+    </ng-template>
+  </li>
+</ul>
